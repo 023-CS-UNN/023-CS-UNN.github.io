@@ -70,3 +70,31 @@ function displayUser() {
         console.log(doc.data());
     })
 }
+
+function navToAdd() {
+    window.location.href = 'addCourses.html';
+}
+
+function displayCourses() {
+
+    var cRef = db.collection("courses").doc("LtoCEGLl5xCFsb405pAB");
+    cRef.get().then((doc) => {
+        var array = doc.data()['courses']
+        for (i = 0; i < array.length; i++) {
+            var larger = document.getElementById('contain');
+            var label = document.createElement('label');
+            label.className = 'label';
+            label.innerText = array[i];
+            var input = document.createElement('input');
+            input.type = 'checkbox';
+            input.className = 'input';
+            var check = document.createElement('span');
+            check.className = 'checkmark';
+            var br = document.createElement('br');
+            label.append(input);
+            label.append(check);
+            label.append(br);
+            larger.append(label);
+        }
+    })
+}

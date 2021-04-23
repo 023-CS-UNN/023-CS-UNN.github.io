@@ -1,12 +1,11 @@
 <html>
 
 <head>
-    <title>My profile</title>
-
-    <link rel="stylesheet" href="..\css\dashboard.css">
+    <title>Add</title>
+    <link rel="stylesheet" href="..\css\add.css">
 </head>
 
-<body onload="checkAuthState()">
+<body onload="checkAuthState(), displayCourses()">
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -26,19 +25,13 @@
         // Your web app's Firebase configuration
     </script>
     <script src="..\javascript\firebase-user.js"></script>
-    <div class="pic">
-        <button class="addbtn" onclick="navToAdd()">Add Course</button>
-        <div id="student-name">
-            <h1 id="studName">...</h1>
-        </div>
-        <div id="student-reg">
-            <h1 id="regn">...</h1>
-        </div>
 
-    </div>
     <div class="welcome">
-        <h1>My Courses</h1>
+        <h1>Add Your Courses</h1>
     </div>
+    <div class="blue"></div>
+    <br/>
+    <div id="contain"></div>
 </body>
 
 </html>
