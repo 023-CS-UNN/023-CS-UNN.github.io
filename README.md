@@ -9,5 +9,5 @@ To perform programmatic `CRUD` operations on the class list.<br>
 To ensure that Class data is kept safely.<br>
 
 # contributors
-[somto][https://google.com]
-Myestery[https://google.com]
+[Override-bot](https://github.com/override-bot)<br>
+[Myestery](https://github.com/myestery)
