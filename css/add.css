@@ -29,6 +29,19 @@ body {
     border-bottom-right-radius: 10px;
 }
 
+.button2 {
+    text-align: center;
+    width: 90%;
+    color: whitesmoke;
+    font-size: xx-large;
+    background-color: rgba(127, 182, 255, 0.863);
+    border: 1px solid rgba(127, 182, 255, 0.863);
+    margin-top: 20px;
+    height: 90px;
+    font-weight: bolder;
+    border-radius: 25px;
+}
+
 .label input {
     position: absolute;
     opacity: 0;

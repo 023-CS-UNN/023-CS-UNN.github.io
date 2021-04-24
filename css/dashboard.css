@@ -33,6 +33,13 @@ body {
     margin: 5px;
 }
 
+.subr {
+    font-size: 25px !important;
+    color: rgba(127, 182, 255, 0.863);
+    font-weight: bolder;
+    margin: 5px;
+}
+
 .addbtn {
     height: 50px;
     width: 200px;
