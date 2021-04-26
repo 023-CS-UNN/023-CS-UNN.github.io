@@ -33,6 +33,8 @@ body {
     margin: 5px;
 }
 
+<<<<<<< HEAD
+=======
 .subr {
     font-size: 25px !important;
     color: rgba(127, 182, 255, 0.863);
@@ -40,6 +42,7 @@ body {
     margin: 5px;
 }
 
+>>>>>>> 6df5162b936af450b62623f04358d8a8b91307d7
 .addbtn {
     height: 50px;
     width: 200px;
@@ -53,4 +56,51 @@ body {
 
 button:focus {
     outline: none;
+<<<<<<< HEAD
+=======
+}
+
+@media only screen and (min-width: 1200px) {
+    #Student-name {
+        padding: 5px;
+        color: white;
+        font-size: 18px !important;
+        font-weight: bolder;
+        text-align: center;
+    }
+    #student-reg {
+        color: grey;
+        font-size: 12px !important;
+        font-weight: bold;
+        text-align: center;
+    }
+    .addbtn {
+        height: 30px;
+        width: 100px;
+        background-color: white;
+        color: rgba(127, 182, 255, 0.863);
+        border: 1px solid rgba(127, 182, 255, 0.863);
+        font-size: 14px;
+        font-weight: bold;
+        border-bottom-right-radius: 10px;
+    }
+    body {
+        background-color: white;
+        width: 80%;
+        margin: 0 auto;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .welcome {
+        font-size: 18px !important;
+        color: gray;
+        font-weight: bold;
+        margin: 10px;
+    }
+    .subr {
+        font-size: 14px !important;
+        color: rgba(59, 134, 231, 0.863);
+        font-weight: bold;
+        margin: 10px;
+    }
+>>>>>>> 6df5162b936af450b62623f04358d8a8b91307d7
 }
