@@ -23,9 +23,10 @@ export default {
       { src: "https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js" },
 
       { src: "https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js" },
-
+      
       { src: "https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js" },
-      { src: "https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js" }
+      { src: "https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js" },
+      { src: "/firebase-init.js" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },

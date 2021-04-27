@@ -7,6 +7,7 @@
             <v-subheader>Login</v-subheader>
 
             <!-- <v-list two-line> -->
+            <v-form ref="form" v-model="valid" lazy-validation>
               <template>
                 <v-list-item>
                   <v-list-item-content>
@@ -16,25 +17,42 @@
                       :counter="10"
                       :rules="emailRules"
                       label="Email"
+                      name="email"
+                      autocomplete
                       required
                     ></v-text-field>
                   </v-list-item-content> </v-list-item
               ></template>
-            <!-- </v-list> -->
-            <!-- <v-list two-line> -->
+              <!-- </v-list> -->
+              <!-- <v-list two-line> -->
               <template>
                 <v-list-item>
                   <v-list-item-content>
                     <!-- <v-list-item-title>Email</v-list-item-title> -->
                     <v-text-field
-                      v-model="email"
+                      v-model="password"
                       :counter="10"
-                      :rules="emailRules"
+                      :rules="passwordRules"
                       label="Password"
                       required
                     ></v-text-field>
-                  </v-list-item-content> </v-list-item
-              ></template>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-btn
+                  style="margin-left: 10px"
+                  :disabled="!valid"
+                  color="success"
+                  class="mr-4"
+                  @click="validate"
+                >
+                  Login</v-btn
+                >
+                <small
+                  >Dont have an account?
+                  <nuxt-link to="/register"> Register</nuxt-link></small
+                >
+              </template>
+            </v-form>
             <!-- </v-list> -->
           </v-card>
         </v-col>
@@ -45,12 +63,47 @@
 
 <script>
 export default {
-    data() {
-        return {
-            email:"",
-            emailRules:""
-        }
+  data() {
+    return {
+      email: "",
+      password: "",
+      valid: true,
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+      passwordRules: [
+        (v) => !!v || "Password is required",
+        (v) =>
+          (v && v.length >= 5) || "Password must be more than 5 characters",
+      ],
+    };
+  },
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+      if (this.valid) {
+        this.submit();
+      }
     },
+    reset() {
+      this.$refs.form.reset();
+    },
+    submit() {
+    firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then((userCredential) => {
+            user = userCredential.user;
+            console.log(userCredential)
+            // window.location.href = "html/dashboard.html";
+        })
+        .catch((error) => {
+            // var err = document.getElementById('error');
+            // // var errorCode = error.code;
+            // var errorMessage = error.message;
+            // err.innerHTML = errorMessage;
+        });
+    },
+  },
 };
 </script>
 

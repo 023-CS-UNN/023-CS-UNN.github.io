@@ -38,7 +38,6 @@
 
 <script>
 // RecentDocuments.vue
-import { db } from '../plugins/db'
 export default {
   data() {
     return {
@@ -46,8 +45,5 @@ export default {
       documents: [],
     };
   }, 
-   firestore: {
-    documents: db.collection('documents'),
-  },
 };
 </script>
