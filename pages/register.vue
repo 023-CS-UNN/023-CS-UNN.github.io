@@ -1,98 +1,100 @@
 <template>
   <v-main>
+      <v-card>
     <v-container>
-      <v-row>
-        <v-col cols="12">
-          <!-- <v-card> -->
-          <v-subheader>Register</v-subheader>
+        <v-row>
+          <v-col cols="12">
+            <!-- <v-card> -->
+            <v-subheader>Register</v-subheader>
 
-          <!-- <v-list two-line> -->
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-row>
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="firstname"
-                  :rules="nameRules"
-                  :counter="10"
-                  label="First name"
-                  required
-                ></v-text-field>
-              </v-col>
+            <!-- <v-list two-line> -->
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <v-row>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="firstname"
+                    :rules="nameRules"
+                    :counter="10"
+                    label="First name"
+                    required
+                  ></v-text-field>
+                </v-col>
 
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="lastname"
-                  :rules="nameRules"
-                  :counter="10"
-                  label="Last name"
-                  required
-                ></v-text-field>
-              </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="lastname"
+                    :rules="nameRules"
+                    :counter="10"
+                    label="Last name"
+                    required
+                  ></v-text-field>
+                </v-col>
 
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="middlename"
-                  :counter="10"
-                  label="Middle Name"
-                ></v-text-field>
-              </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="middlename"
+                    :counter="10"
+                    label="Middle Name"
+                  ></v-text-field>
+                </v-col>
 
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
-                  label="E-mail"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="regnumber"
-                  :rules="regnumberRules"
-                  label="Reg Number"
-                  placeholder="2018/123456"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="password"
-                  :rules="passwordRules"
-                  label="Password"
-                  type="password"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="passwordConfirmation"
-                  :rules="passwordConfirmationRules"
-                  label="Confirm Password"
-                  type="password"
-                  required
-                ></v-text-field>
-              </v-col>
-              <!-- <v-col></v-col> -->
-            </v-row>
-            <v-btn
-              style="margin-left: 10px"
-              :disabled="!valid"
-              color="success"
-              class="mr-4"
-              @click="validate"
-            >
-              Register</v-btn
-            >
-            <small
-              >Already have an account?
-              <nuxt-link to="/login"> Login</nuxt-link></small
-            >
-          </v-form>
-          <!-- </v-list> -->
-          <!-- </v-card> -->
-        </v-col>
-      </v-row>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    label="E-mail"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="regnumber"
+                    :rules="regnumberRules"
+                    label="Reg Number"
+                    placeholder="2018/123456"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="password"
+                    :rules="passwordRules"
+                    label="Password"
+                    type="password"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="passwordConfirmation"
+                    :rules="passwordConfirmationRules"
+                    label="Confirm Password"
+                    type="password"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <!-- <v-col></v-col> -->
+              </v-row>
+              <v-btn
+                style="margin-left: 10px"
+                :disabled="!valid"
+                color="success"
+                class="mr-4"
+                @click="validate"
+              >
+                Register</v-btn
+              >
+              <small
+                >Already have an account?
+                <nuxt-link to="/login"> Login</nuxt-link></small
+              >
+            </v-form>
+            <!-- </v-list> -->
+            <!-- </v-card> -->
+          </v-col>
+        </v-row>
     </v-container>
+      </v-card>
   </v-main>
 </template>
 
@@ -151,17 +153,17 @@ export default {
             .doc(user.uid)
             .set({
               name: {
-                  lastname:this.lastname,
-                  middlename:this.middlename,
-                  firstname:this.firstname
+                lastname: this.lastname,
+                middlename: this.middlename,
+                firstname: this.firstname,
               },
               regNumber: this.regnumber,
             })
             .then((res) => {
-             console.log(res)
+              console.log(res);
             })
             .catch((error) => {
-            //   alert(error);
+              //   alert(error);
             });
           // addUserDetails(user.uid);
         })

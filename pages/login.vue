@@ -33,6 +33,7 @@
                       v-model="password"
                       :counter="10"
                       :rules="passwordRules"
+                      type="password"
                       label="Password"
                       required
                     ></v-text-field>
@@ -47,13 +48,28 @@
                 >
                   Login</v-btn
                 >
-                <small
-                  >Dont have an account?
-                  <nuxt-link to="/register"> Register</nuxt-link></small
-                >
               </template>
             </v-form>
-            <!-- </v-list> -->
+            <br />
+            <small
+              >Dont have an account?
+              <nuxt-link to="/register"> Register</nuxt-link></small
+            >
+            <!-- <BottomSheet v-if="loginHasError" :text="errorMessage"/> -->
+            <v-snackbar v-model="loginHasError" :timeout="2000">
+              {{ errorMessage }}
+
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="blue"
+                  text
+                  v-bind="attrs"
+                  @click="loginHasError = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
           </v-card>
         </v-col>
       </v-row>
@@ -77,6 +93,8 @@ export default {
         (v) =>
           (v && v.length >= 5) || "Password must be more than 5 characters",
       ],
+      loginHasError: false,
+      errorMessage: "",
     };
   },
   methods: {
@@ -90,17 +108,18 @@ export default {
       this.$refs.form.reset();
     },
     submit() {
-    firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      let vm = this;
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {
-            user = userCredential.user;
-            console.log(userCredential)
-            // window.location.href = "html/dashboard.html";
+          let user = userCredential.user;
+          console.log(user);
+          vm.$router.push("/");
         })
         .catch((error) => {
-            // var err = document.getElementById('error');
-            // // var errorCode = error.code;
-            // var errorMessage = error.message;
-            // err.innerHTML = errorMessage;
+          this.loginHasError = true;
+          this.errorMessage = error.message;
         });
     },
   },

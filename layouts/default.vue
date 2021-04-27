@@ -3,18 +3,20 @@
     <v-system-bar app>
       <v-spacer></v-spacer>
 
-      <v-icon>mdi-square</v-icon>
+      <nuxt-link to="/"><v-icon>mdi-home</v-icon></nuxt-link>
 
-      <v-icon>mdi-circle</v-icon>
+      <nuxt-link to="/addCourse"><v-icon>mdi-account</v-icon></nuxt-link>
 
-      <v-icon>mdi-triangle</v-icon>
+      <nuxt-link to="/print-list"><v-icon>mdi-home</v-icon></nuxt-link>
     </v-system-bar>
 
     <v-navigation-drawer v-model="drawer" app>
       <v-sheet color="grey lighten-4" class="pa-4">
-        <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
+        <v-avatar class="mb-4" color="blue darken-1" size="64"
+          ><v-icon>mdi-account</v-icon></v-avatar
+        >
 
-        <div>{{ auth ? user.name : "Guest" }}</div>
+        <div>{{ auth ? user.name.firstname : "Guest" }}</div>
       </v-sheet>
 
       <v-divider></v-divider>
@@ -22,7 +24,7 @@
       <v-list>
         <v-list-item to="/">
           <v-list-item-icon>
-            <v-icon>mdi-gome</v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -66,13 +68,37 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data: () => ({
     drawer: null,
   }),
   computed: {
     ...mapState(["auth", "user"]),
+  },
+  mounted() {
+    let vm = this;
+    firebase.auth().onAuthStateChanged(function (auth) {
+      if (auth) {
+        let studRef = db.collection("Students").doc(auth.uid);
+        studRef.get().then((doc) => {
+          vm.$store.commit("login", doc.data());
+        });
+      } else {
+        vm.$store.commit("logout");
+      }
+    });
+    this.LoadCourses()
+  },
+  methods: {
+    LoadCourses() {
+      let vm = this
+      db.collection("courses")
+        .get()
+        .then((res) => {
+          vm.$store.commit("setCourses",res.docs.map(doc => doc.data()));
+        });
+    },
   },
 };
 </script>
