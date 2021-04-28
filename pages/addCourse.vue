@@ -2,9 +2,7 @@
   <v-main>
     <v-container>
       <v-card>
-        <v-card-title>
-          Select Your courses
-        </v-card-title>
+        <v-card-title> Select Your courses </v-card-title>
         <v-form>
           <v-sheet width="80%" height="100%" class="pa-12">
             <v-checkbox
@@ -20,6 +18,20 @@
           </v-sheet>
         </v-form>
       </v-card>
+      <v-snackbar v-model="loginHasError" :timeout="2000">
+        {{ errorMessage }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="blue"
+            text
+            v-bind="attrs"
+            @click="loginHasError = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-container>
   </v-main>
 </template>
@@ -30,6 +42,8 @@ export default {
   data() {
     return {
       course_selections: [],
+      loginHasError:false,
+      errorMessage:""
     };
   },
   computed: {
@@ -48,9 +62,12 @@ export default {
         })
         .then((res) => {
           vm.$store.commit("setUserCourses", vm.course_selections);
+          this.loginHasError = true
+          this.errorMessage = "Saved your records"
         })
         .catch((error) => {
-          console.log(error);
+          this.loginHasError = true
+          this.errorMessage = error.message
         });
     },
   },

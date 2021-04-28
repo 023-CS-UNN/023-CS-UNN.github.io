@@ -1,7 +1,7 @@
 <template>
   <v-main>
-      <v-card>
-    <v-container>
+    <v-card>
+      <v-container>
         <v-row>
           <v-col cols="12">
             <!-- <v-card> -->
@@ -89,12 +89,24 @@
                 <nuxt-link to="/login"> Login</nuxt-link></small
               >
             </v-form>
-            <!-- </v-list> -->
-            <!-- </v-card> -->
+            <v-snackbar v-model="loginHasError" :timeout="2000">
+              {{ errorMessage }}
+
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="blue"
+                  text
+                  v-bind="attrs"
+                  @click="loginHasError = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
           </v-col>
         </v-row>
-    </v-container>
-      </v-card>
+      </v-container>
+    </v-card>
   </v-main>
 </template>
 
@@ -109,8 +121,10 @@ export default {
       lastname: "",
       middlename: "",
       password: "",
+      errorMessage: "",
       passwordConfirmation: "",
       valid: true,
+      loginHasError: false,
       emailRules: [
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
@@ -157,19 +171,19 @@ export default {
                 firstname: this.firstname,
               },
               regNumber: this.regnumber,
-              courses:[]
+              courses: [],
             })
             .then((res) => {
-              console.log(res,"the name has been set");
+              console.log(res, "the name has been set");
             })
             .catch((error) => {
-              //   alert(error);
+              this.loginHasError = true;
+              this.errorMessage = error.mesage;
             });
-          // addUserDetails(user.uid);
         })
         .catch((error) => {
-          // var errorMessage = error.message;
-          console.log(error);
+          this.loginHasError = true;
+          this.errorMessage = error.message;
         });
     },
   },
