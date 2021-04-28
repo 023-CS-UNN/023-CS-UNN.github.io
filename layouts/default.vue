@@ -82,7 +82,8 @@ export default {
       if (auth) {
         let studRef = db.collection("Students").doc(auth.uid);
         studRef.get().then((doc) => {
-          vm.$store.commit("login", doc.data());
+          vm.$store.commit("login", {...doc.data(),id:doc.id});
+          vm.$router.push('/')
         });
       } else {
         vm.$store.commit("logout");
@@ -96,7 +97,7 @@ export default {
       db.collection("courses")
         .get()
         .then((res) => {
-          vm.$store.commit("setCourses",res.docs.map(doc => doc.data()));
+          vm.$store.commit("setCourses",res.docs.map(doc => {let id = doc.id ;return {...doc.data(),id}}));
         });
     },
   },

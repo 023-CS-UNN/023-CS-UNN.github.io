@@ -148,7 +148,6 @@ export default {
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {
           let user = userCredential.user;
-          console.log(user.uid);
           db.collection("Students")
             .doc(user.uid)
             .set({
@@ -158,9 +157,10 @@ export default {
                 firstname: this.firstname,
               },
               regNumber: this.regnumber,
+              courses:[]
             })
             .then((res) => {
-              console.log(res);
+              console.log(res,"the name has been set");
             })
             .catch((error) => {
               //   alert(error);
@@ -168,10 +168,7 @@ export default {
           // addUserDetails(user.uid);
         })
         .catch((error) => {
-          // var err = document.getElementById('error');
-          // // var errorCode = error.code;
           // var errorMessage = error.message;
-          // err.innerHTML = errorMessage;
           console.log(error);
         });
     },
