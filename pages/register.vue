@@ -175,7 +175,6 @@ export default {
               courses: [],
             })
             .then((res) => {
-              console.log(res, "the name has been set");
             })
             .catch((error) => {
               this.loginHasError = true;

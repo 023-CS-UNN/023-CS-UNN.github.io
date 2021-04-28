@@ -115,7 +115,6 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {
           let user = userCredential.user;
-          console.log(user);
           vm.$router.push("/");
         })
         .catch((error) => {

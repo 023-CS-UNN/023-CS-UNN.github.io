@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "core-js": "^3.9.1",
-    "docx": "^6.0.3",
     "firebase": "^8.4.2",
+    "fs": "0.0.1-security",
     "nuxt": "^2.15.3",
     "vuefire": "^2.2.5"
   },
