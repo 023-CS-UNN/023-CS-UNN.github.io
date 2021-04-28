@@ -97,6 +97,7 @@ export default {
       errorMessage: "",
     };
   },
+  middleware:"guest",
   methods: {
     validate() {
       this.$refs.form.validate();

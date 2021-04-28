@@ -146,6 +146,7 @@ export default {
       nameRules: [(v) => !!v || "This field is required"],
     };
   },
+  middleware:"guest",
   methods: {
     validate() {
       this.$refs.form.validate();

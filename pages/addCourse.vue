@@ -46,6 +46,7 @@ export default {
       errorMessage:""
     };
   },
+  middleware:"auth",
   computed: {
     ...mapState(["auth", "courses", "user"]),
   },
