@@ -19,17 +19,13 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-title
-                        ><nuxt-link :to="`/courses/${course.id}`">
-                          {{ course.code }}</nuxt-link
-                        ></v-list-item-title
-                      >
+                      <v-list-item-title><nuxt-link :to="`/courses/${course.id}`"> {{ course.code }}</nuxt-link></v-list-item-title>
 
                       <v-list-item-subtitle>
                         {{ course.title }}
                       </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        Selected by {{ course.users>0?course.users+' student':'none' }}{{course.users>1?'s':''}} 
+                       <v-list-item-subtitle>
+                        {{ course.users }} offer this course
                       </v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>

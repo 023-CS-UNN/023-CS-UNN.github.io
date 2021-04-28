@@ -44,11 +44,11 @@
 
         <v-list-item to="/addCourse" v-if="auth">
           <v-list-item-icon>
-            <v-icon>mdi-plus</v-icon>
+            <v-icon>mdi-account</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>Add Course</v-list-item-title>
+          <v-list-item-content v-if="auth">
+            <v-list-item-title>My Courses</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -76,30 +76,42 @@ export default {
   computed: {
     ...mapState(["auth", "user"]),
   },
-  mounted() {
+  mounted() {},
+  methods: {
+    LoadCourses() {
+      let vm = this;
+    },
+  },
+  async fetch() {
     let vm = this;
     firebase.auth().onAuthStateChanged(function (auth) {
       if (auth) {
         let studRef = db.collection("Students").doc(auth.uid);
         studRef.get().then((doc) => {
-          vm.$store.commit("login", {...doc.data(),id:doc.id});
-          vm.$router.push('/')
+          vm.$store.commit("login", { ...doc.data(), id: doc.id });
+          vm.$router.push("/");
         });
       } else {
         vm.$store.commit("logout");
       }
     });
-    this.LoadCourses()
-  },
-  methods: {
-    LoadCourses() {
-      let vm = this
-      db.collection("courses")
-        .get()
-        .then((res) => {
-          vm.$store.commit("setCourses",res.docs.map(doc => {let id = doc.id ;return {...doc.data(),id}}));
+
+    db.collection("courses")
+      .get()
+      .then((res) => {
+        let courses = res.docs.map((doc) => {
+          let id = doc.id;
+          return { ...doc.data(), id };
         });
-    },
+        vm.$store.commit("setCourses", courses);
+      })
+      .then(() => {
+        db.collection("Students")
+          .get()
+          .then((res) => {
+            vm.$store.commit("setCourseUsers", res.docs.map(x=>x.data().courses));
+          });
+      });
   },
 };
 </script>

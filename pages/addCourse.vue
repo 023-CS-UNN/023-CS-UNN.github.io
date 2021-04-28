@@ -2,12 +2,12 @@
   <v-main>
     <v-container>
       <v-card>
-        <v-card-title primary-title>
-          Select the Courses You want to register this semester
+        <v-card-title>
+          Select Your courses
         </v-card-title>
         <v-form>
           <v-sheet width="80%" height="100%" class="pa-12">
-            <v-switch
+            <v-checkbox
               v-for="course in courses"
               :key="course.id"
               v-model="course_selections"
@@ -15,7 +15,7 @@
               :label="course.code"
               :value="course.id"
             >
-            </v-switch>
+            </v-checkbox>
             <v-btn color="success" @click="submit">Save</v-btn>
           </v-sheet>
         </v-form>

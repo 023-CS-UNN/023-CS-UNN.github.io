@@ -11,7 +11,6 @@ export const state = () => ({
 
 export const mutations = {
   login(state, data) {
-    console.log(data, "from state");
     state.auth = true;
     state.user = {
       name: data.name,
@@ -33,7 +32,22 @@ export const mutations = {
   setCourses(state, data) {
     state.courses = data;
   },
-    setUserCourses(state, data) {
+  setUserCourses(state, data) {
     state.user.courses = data;
+  },
+  setCourseUsers(state, users) {
+    let courses = {};
+    state.courses.map(x => {
+      courses[x.id] = 0;
+    });
+    users.map(courseList => {
+      courseList.map(course => {
+        courses[course]++;
+      });
+    });
+    state.courses = state.courses.map(x => {
+      x.users = courses[x.id];
+      return x;
+    });
   }
 };
