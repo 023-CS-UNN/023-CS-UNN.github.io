@@ -20,7 +20,7 @@ export const mutations = {
       id: data.id
     };
   },
-  logout(state) {
+  Logout(state) {
     state.user = {
       name: "name",
       email: "email",

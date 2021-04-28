@@ -61,6 +61,15 @@
             <v-list-item-title>Print Class List</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item @click="Logout" v-if="auth">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <nuxt />
@@ -78,8 +87,14 @@ export default {
   },
   mounted() {},
   methods: {
-    LoadCourses() {
+    Logout() {
       let vm = this;
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          vm.$store.commit("Logout");
+        });
     },
   },
   async fetch() {
@@ -92,7 +107,7 @@ export default {
           vm.$router.push("/");
         });
       } else {
-        vm.$store.commit("logout");
+        vm.$store.commit("Logout");
       }
     });
 
@@ -109,7 +124,10 @@ export default {
         db.collection("Students")
           .get()
           .then((res) => {
-            vm.$store.commit("setCourseUsers", res.docs.map(x=>x.data().courses));
+            vm.$store.commit(
+              "setCourseUsers",
+              res.docs.map((x) => x.data().courses)
+            );
           });
       });
   },
