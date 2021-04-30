@@ -10,10 +10,9 @@
   },
   "dependencies": {
     "core-js": "^3.9.1",
-    "firebase": "^8.4.2",
-    "fs": "0.0.1-security",
-    "nuxt": "^2.15.3",
-    "vuefire": "^2.2.5"
+    "jspdf": "^2.3.1",
+    "jspdf-autotable": "^3.5.14",
+    "nuxt": "^2.15.3"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3"

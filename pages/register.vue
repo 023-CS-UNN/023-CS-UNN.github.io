@@ -25,7 +25,7 @@
                     v-model="lastname"
                     :rules="nameRules"
                     :counter="10"
-                    label="Last name"
+                    label="Surname"
                     required
                   ></v-text-field>
                 </v-col>
@@ -146,7 +146,7 @@ export default {
       nameRules: [(v) => !!v || "This field is required"],
     };
   },
-  middleware:"guest",
+  middleware: "guest",
   methods: {
     validate() {
       this.$refs.form.validate();
@@ -174,8 +174,7 @@ export default {
               regNumber: this.regnumber,
               courses: [],
             })
-            .then((res) => {
-            })
+            .then((res) => {})
             .catch((error) => {
               this.loginHasError = true;
               this.errorMessage = error.mesage;

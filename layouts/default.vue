@@ -6,8 +6,6 @@
       <nuxt-link to="/"><v-icon>mdi-home</v-icon></nuxt-link>
 
       <nuxt-link to="/addCourse"><v-icon>mdi-account</v-icon></nuxt-link>
-
-      <nuxt-link to="/print-list"><v-icon>mdi-home</v-icon></nuxt-link>
     </v-system-bar>
 
     <v-navigation-drawer v-model="drawer" app>
@@ -52,15 +50,6 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/print-list" v-if="auth">
-          <v-list-item-icon>
-            <v-icon>mdi-mail</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Print Class List</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
         <v-list-item @click="Logout" v-if="auth">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
