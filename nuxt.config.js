@@ -72,5 +72,10 @@ export default {
   build: {},
   router:{
     base: '/023-CS-UNN.github.io/'
-  }
+  },
+  generate: {
+    exclude: [
+      /^\/dynamic-route\//,
+    ]
+  },
 };
