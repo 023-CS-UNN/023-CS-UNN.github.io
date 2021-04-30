@@ -69,5 +69,8 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+  router:{
+    base: '/023-CS-UNN.github.io/'
+  }
 };
