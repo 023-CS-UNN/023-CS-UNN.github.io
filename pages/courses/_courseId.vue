@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <v-container class="py-8 px-6" fluid>
-      <v-card v-if="validCourse"> 
+      <v-card v-if="validCourse">
         <template>
           <div>
             <v-list-item>
@@ -45,8 +45,8 @@
         ><v-dialog v-model="dialog" hide-overlay persistent width="300">
           <v-card color="primary" dark>
             <v-card-text>
-              {{querying?"Getting user records":""}}
-              {{converting?"Converting to pdf":""}}
+              {{ querying ? "Getting user records" : "" }}
+              {{ converting ? "Converting to pdf" : "" }}
               <v-progress-linear
                 indeterminate
                 color="white"
@@ -57,12 +57,11 @@
         </v-dialog>
       </v-card>
       <v-card v-else>
-       <v-skeleton-loader
+        <v-skeleton-loader
           v-bind="attrs"
           type="date-picker"
         ></v-skeleton-loader>
       </v-card>
-
     </v-container>
   </v-main>
 </template>
@@ -74,11 +73,11 @@ import "jspdf-autotable";
 export default {
   data() {
     return {
-      dialog:false,
-      querying:false,
-      converting:false,
+      dialog: false,
+      querying: false,
+      converting: false,
       attrs: {
-        class: 'mb-6',
+        class: "mb-6",
         boilerplate: true,
         elevation: 2,
       },
@@ -89,9 +88,9 @@ export default {
     course() {
       return this.courses.filter((x) => x.id == this.$route.params.courseId)[0];
     },
-    validCourse(){
-      return this.courses.filter((x) => x.id == this.$route.params.courseId)[0]
-    }
+    validCourse() {
+      return this.courses.filter((x) => x.id == this.$route.params.courseId)[0];
+    },
   },
   head: {
     script: [{ src: "/autotable.jspdf.js" }],
@@ -101,20 +100,30 @@ export default {
       let vm = this;
       let courseId = this.$route.params.courseId;
       let students = [];
-      this.querying = true
-      this.dialog = true
+      this.querying = true;
+      this.dialog = true;
       db.collection("Students")
         .where("courses", "array-contains", courseId)
         .get()
         .then((res) => {
-          vm.querying= false
-          vm.converting = true
+          vm.querying = false;
+          vm.converting = true;
           res.docs.map((x) => {
             students.push(x.data());
           });
         })
         .then(() => {
-          console.log(students);
+          // for those that'll always break the rules
+          for (let i = 0; i < 20; i++) {
+            students.push({
+              name: {
+                firstname: "",
+                lastname: "",
+                middlename: "",
+              },
+              regNumber: "",
+            });
+          }
           const doc = new jsPDF({
             orientation: "l",
             unit: "mm",
@@ -122,19 +131,20 @@ export default {
             putOnlyUsedFonts: true,
             floatPrecision: "smart",
           });
+          doc.setFontSize(15);
           doc.text("\t\t\t\t\t\t\tUNIVERSITY OF NIGERIA NSUKKA", 10, 10);
           doc.text("\t\t\t\t\t\tDEPARTMENT OF COMPUTER SCIENCE", 10, 18);
           doc.text("\t\t\t\t\t\t\t\t200 LEVEL CLASS LIST", 10, 26);
-          doc.setFontSize(13);
+          doc.setFontSize(11);
 
-          doc.text("Academic Year: 2019/2020", 18, 35);
-          doc.text(`Course Title:${this.course.title}`, 100, 35);
-          doc.text(`Course Code:${this.course.code}`, 200, 35);
-          const colStyles = { lineWidth: 0.2, lineColor: 2,fontSize:8 }
+          doc.text("ACADEMIC YEAR: 2019/2020", 18, 32);
+          doc.text(`COURSE TITLE:${this.course.title}`, 100, 32);
+          doc.text(`COURSE CODE:${this.course.code}`, 200, 32);
+          const colStyles = { lineWidth: 0.2, lineColor: 2, fontSize: 8 };
           // Example usage of columns property. Note that America will not be included even though it exist in the body since there is no column specified for it.
           doc.autoTable({
-            startY: 40,
-            margin:5,
+            startY: 35,
+            margin: 5,
             columnStyles: {
               sn: colStyles,
               name: colStyles,
@@ -155,7 +165,7 @@ export default {
               lineWidth: 0.2,
               lineColor: 2,
             },
-            body: new Array(67).fill (students[0]).map((student, i) => {
+            body: students.map((student, i) => {
               return {
                 sn: i + 1,
                 name: `${student.name.lastname.toUpperCase()} ${student.name.firstname.toUpperCase()} ${student.name.middlename.toUpperCase()}`,
@@ -187,8 +197,8 @@ export default {
             ],
           });
           doc.save(`Class list for ${vm.course.code}.pdf`);
-          vm.converting = false
-          vm.dialog =false
+          vm.converting = false;
+          vm.dialog = false;
         });
     },
   },
