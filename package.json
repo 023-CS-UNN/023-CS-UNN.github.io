@@ -16,5 +16,6 @@
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3"
-  }
+  },
+  "deploy": "push-dir --dir=dist --branch=main --cleanup"
 }
