@@ -154,7 +154,7 @@ export default {
         .then((res) => {
           vm.loginHasSuccess = true;
           vm.loading = false;
-          vm.commit('updateUser',{
+          vm.$store.commit('updateUser',{
               lastname:vm.lastname,
               firstname:vm.firstname,
               middlename:vm.middlename,
