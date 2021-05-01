@@ -88,5 +88,3 @@ export default {
     ]
   },
 };
-
-<meta property="og:image" itemprop="image" content="http://pollosweb.wesped.es/programa_pollos/play.png">
