@@ -70,8 +70,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    publicPath: "_nuxt/dist",
-    buildDir :"_nuxt/dist"
+    // publicPath: "_nuxt/dist",
+    // buildDir :"_nuxt/dist"
   },
   router:{
     // base: '/023-CS-UNN.github.io/'
