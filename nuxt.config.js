@@ -17,7 +17,13 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" }
+      { hid: "description", name: "description", content: "" },
+      { property: "og:site_name", content: "UNN 200 LEVEL STUDENTS" },
+      { property: "og:title", content: "Class list generator app" },
+      { property: "og:description", content: "The App for generating class lists" },
+      { property: "og:image", itemprop:"image", content: "https://avatars.githubusercontent.com/u/82499169?s=200&v=4" },
+      { property: "og:type", content: "website" },
+      { property: "og:updated_time", content: Date.now() },
     ],
     script: [
       { src: "https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js" },
@@ -82,3 +88,5 @@ export default {
     ]
   },
 };
+
+<meta property="og:image" itemprop="image" content="http://pollosweb.wesped.es/programa_pollos/play.png">
