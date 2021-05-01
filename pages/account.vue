@@ -9,7 +9,7 @@
               <v-text-field
                 v-model="lastname"
                 :rules="nameRules"
-                :counter="10"
+                :counter="15"
                 label="Surname"
                 required
               ></v-text-field>
@@ -18,7 +18,7 @@
               <v-text-field
                 v-model="firstname"
                 :rules="nameRules"
-                :counter="10"
+                :counter="15"
                 label="First name"
                 required
               ></v-text-field>
@@ -28,7 +28,7 @@
             ><v-col cols="12" md="4">
               <v-text-field
                 v-model="middlename"
-                :counter="10"
+                :counter="15"
                 label="Middle Name"
               ></v-text-field>
             </v-col>

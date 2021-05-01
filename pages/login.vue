@@ -14,7 +14,7 @@
                     <!-- <v-list-item-title>Email</v-list-item-title> -->
                     <v-text-field
                       v-model="email"
-                      :counter="10"
+                      :counter="15"
                       :rules="emailRules"
                       label="Email"
                       name="email"
@@ -31,7 +31,7 @@
                     <!-- <v-list-item-title>Email</v-list-item-title> -->
                     <v-text-field
                       v-model="password"
-                      :counter="10"
+                      :counter="15"
                       :rules="passwordRules"
                       type="password"
                       label="Password"
