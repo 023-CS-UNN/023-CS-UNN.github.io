@@ -1,0 +1,44 @@
+[
+  {
+    "name": "addCourse",
+    "path": "/addCourse",
+    "component": "C:\\\\wamp64\\\\www\\\\class_data\\\\class_list_nuxt\\\\class_list\\\\pages\\\\addCourse.vue",
+    "chunkName": "pages/addCourse",
+    "_name": "_31cf8b02"
+  },
+  {
+    "name": "courses",
+    "path": "/courses",
+    "component": "C:\\\\wamp64\\\\www\\\\class_data\\\\class_list_nuxt\\\\class_list\\\\pages\\\\courses\\\\index.vue",
+    "chunkName": "pages/courses/index",
+    "_name": "_66fce2a4"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "C:\\\\wamp64\\\\www\\\\class_data\\\\class_list_nuxt\\\\class_list\\\\pages\\\\login.vue",
+    "chunkName": "pages/login",
+    "_name": "_3e184a62"
+  },
+  {
+    "name": "register",
+    "path": "/register",
+    "component": "C:\\\\wamp64\\\\www\\\\class_data\\\\class_list_nuxt\\\\class_list\\\\pages\\\\register.vue",
+    "chunkName": "pages/register",
+    "_name": "_9015d0a6"
+  },
+  {
+    "name": "courses-courseId",
+    "path": "/courses/:courseId",
+    "component": "C:\\\\wamp64\\\\www\\\\class_data\\\\class_list_nuxt\\\\class_list\\\\pages\\\\courses\\\\_courseId.vue",
+    "chunkName": "pages/courses/_courseId",
+    "_name": "_81a57972"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\wamp64\\\\www\\\\class_data\\\\class_list_nuxt\\\\class_list\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_174c37b8"
+  }
+]

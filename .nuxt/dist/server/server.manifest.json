@@ -1,0 +1,21 @@
+{
+  "entry": "server.js",
+  "files": {
+    "pages/addCourse.js": "pages/addCourse.js",
+    "pages/courses/_courseId.js": "pages/courses/_courseId.js",
+    "pages/courses/index.js": "pages/courses/index.js",
+    "pages/index.js": "pages/index.js",
+    "pages/login.js": "pages/login.js",
+    "pages/register.js": "pages/register.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "pages/addCourse.js": "pages/addCourse.js.map",
+    "pages/courses/_courseId.js": "pages/courses/_courseId.js.map",
+    "pages/courses/index.js": "pages/courses/index.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "pages/login.js": "pages/login.js.map",
+    "pages/register.js": "pages/register.js.map",
+    "server.js": "server.js.map"
+  }
+}
