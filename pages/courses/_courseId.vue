@@ -24,13 +24,15 @@
                   <v-card-subtitle>
                     {{ course.description }}
                   </v-card-subtitle>
-                  {{
-                    auth
-                      ? user.courses.includes($route.params.courseId)
-                        ? "You offer this course and your name is in the class list for this course"
-                        : "You do not offer this course and your name is not in the class list for this course"
-                      : "Login to know if you offer this course"
-                  }}
+                  <v-alert type="success" v-if="auth && user.courses.includes($route.params.courseId)">
+                    You offer this course and your name is in the class list for this course
+                  </v-alert>
+                  <v-alert type="warning" v-if="auth && !user.courses.includes($route.params.courseId)">
+                    You do not offer this course and your name is not in the class list for this course
+                  </v-alert>
+                  <v-alert v-if="!auth" class="error">
+                  Login to know if you offer this course
+                  </v-alert>
                   <v-btn
                     class="mx-2"
                     :disabled="course.users < 1 || !isValidAdmin"
