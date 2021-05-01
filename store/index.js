@@ -4,7 +4,9 @@ export const state = () => ({
     name: "name",
     email: "email",
     regnumber: "regnumber",
-    courses: []
+    courses: [],
+    isCourseRepFor: [],
+    isAdmin:false
   },
   courses: []
 });
@@ -17,7 +19,9 @@ export const mutations = {
       email: data.email,
       regnumber: data.regNumber,
       courses: data.courses ? data.courses : [],
-      id: data.id
+      id: data.id,
+      isCourseRepFor: data.isCourseRepFor ? data.isCourseRepFor : [],
+      isAdmin:data.isAdmin?data.isAdmin:false
     };
   },
   Logout(state) {
@@ -49,5 +53,15 @@ export const mutations = {
       x.users = courses[x.id];
       return x;
     });
+  },
+  updateUser(state, data) {
+    state.user = {
+      ...state.user,
+      name: {
+        lastname:data.lastname,
+        firstname:data.firstname,
+        middlename:data.middlename,
+      },
+      regnumber:data.regnumber}
   }
 };

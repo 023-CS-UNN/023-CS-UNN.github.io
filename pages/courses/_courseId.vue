@@ -24,9 +24,16 @@
                   <v-card-subtitle>
                     {{ course.description }}
                   </v-card-subtitle>
+                  {{
+                    auth
+                      ? user.courses.includes($route.params.courseId)
+                        ? "You offer this course and your name is in the class list for this course"
+                        : "You do not offer this course and your name is not in the class list for this course"
+                      : "Login to know if you offer this course"
+                  }}
                   <v-btn
                     class="mx-2"
-                    :disabled="course.users < 1"
+                    :disabled="course.users < 1 || !isValidAdmin"
                     fab
                     dark
                     fixed
@@ -36,7 +43,7 @@
                     color="primary"
                     @click="printList"
                   >
-                    <v-icon dark> mdi-printer </v-icon>
+                    <v-icon dark> mdi-download </v-icon>
                   </v-btn>
                 </v-card>
               </v-card-text>
@@ -84,13 +91,16 @@ export default {
     };
   },
   computed: {
-    ...mapState(["auth", "courses"]),
+    ...mapState(["auth", "courses","user"]),
     course() {
       return this.courses.filter((x) => x.id == this.$route.params.courseId)[0];
     },
     validCourse() {
       return this.courses.filter((x) => x.id == this.$route.params.courseId)[0];
     },
+    isValidAdmin(){
+      return this.user.isAdmin|| this.user.isCourseRepFor.includes(this.$route.params.courseId)
+    }
   },
   head: {
     script: [{ src: "/autotable.jspdf.js" }],
@@ -113,6 +123,7 @@ export default {
           });
         })
         .then(() => {
+          students.sort((a, b) => a.name.lastname.localeCompare(b.name.lastname))
           // for those that'll always break the rules
           for (let i = 0; i < 20; i++) {
             students.push({

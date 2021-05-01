@@ -3,9 +3,9 @@
     <v-system-bar app>
       <v-spacer></v-spacer>
 
-      <nuxt-link to="/"><v-icon>mdi-home</v-icon></nuxt-link>
-
-      <nuxt-link to="/addCourse"><v-icon>mdi-account</v-icon></nuxt-link>
+      <v-btn icon @click.stop="drawer = !drawer" v-show="!drawer"
+        ><v-app-bar-nav-icon></v-app-bar-nav-icon
+      ></v-btn>
     </v-system-bar>
 
     <v-navigation-drawer v-model="drawer" app>
@@ -14,7 +14,8 @@
           ><v-icon>mdi-account</v-icon></v-avatar
         >
 
-        <div>{{ auth ? user.name.firstname : "Guest" }}</div>
+        <div v-if="auth">{{ user.name.firstname | capitalize }}</div>
+        <div v-else>Guest</div>
       </v-sheet>
 
       <v-divider></v-divider>
@@ -27,6 +28,15 @@
 
           <v-list-item-content>
             <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/account" v-if="auth">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Account</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -42,7 +52,7 @@
 
         <v-list-item to="/addCourse" v-if="auth">
           <v-list-item-icon>
-            <v-icon>mdi-account</v-icon>
+            <v-icon>mdi-book-multiple</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content v-if="auth">
@@ -66,7 +76,7 @@
 </template>
 
 <script>
-import { mapState} from "vuex";
+import { mapState } from "vuex";
 export default {
   data: () => ({
     drawer: null,
@@ -75,6 +85,13 @@ export default {
     ...mapState(["auth", "user"]),
   },
   mounted() {},
+  filters: {
+    capitalize(value) {
+      if (!value) return "";
+      value = value.toString();
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    },
+  },
   methods: {
     Logout() {
       let vm = this;
