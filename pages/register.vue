@@ -127,7 +127,7 @@ export default {
       loginHasError: false,
       emailRules: [
         (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+        (v) => /.+@.+\..+/.test(v.replace(' ','')) || "E-mail must be valid",
       ],
       passwordRules: [
         (v) => !!v || "Password is required",
@@ -160,7 +160,7 @@ export default {
     submit() {
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(this.email.replace(' ',''), this.password)
         .then((userCredential) => {
           let user = userCredential.user;
           db.collection("Students")

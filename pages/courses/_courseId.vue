@@ -101,7 +101,7 @@ export default {
       return this.courses.filter((x) => x.id == this.$route.params.courseId)[0];
     },
     isValidAdmin(){
-      return this.user.isAdmin|| this.user.isCourseRepFor.includes(this.$route.params.courseId)
+      return this.auth?(this.user.isAdmin|| this.user.isCourseRepFor.includes(this.$route.params.courseId)):false
     }
   },
   head: {

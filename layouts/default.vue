@@ -84,7 +84,8 @@ export default {
   computed: {
     ...mapState(["auth", "user"]),
   },
-  mounted() {},
+  mounted() {
+  },
   filters: {
     capitalize(value) {
       if (!value) return "";
@@ -110,7 +111,9 @@ export default {
         let studRef = db.collection("Students").doc(auth.uid);
         studRef.get().then((doc) => {
           vm.$store.commit("login", { ...doc.data(), id: doc.id });
-          vm.$router.push("/");
+          if(vm.$route.path == '/login' || vm.$route.path == '/register'){
+            vm.$router.push('/')
+          }
         });
       } else {
         vm.$store.commit("Logout");
