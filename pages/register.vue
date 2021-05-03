@@ -81,6 +81,7 @@
                 color="success"
                 class="mr-4"
                 @click="validate"
+                :loading="loading"
               >
                 Register</v-btn
               >
@@ -123,6 +124,7 @@ export default {
       password: "",
       errorMessage: "",
       passwordConfirmation: "",
+      loading:false,
       valid: true,
       loginHasError: false,
       emailRules: [
@@ -158,6 +160,8 @@ export default {
       this.$refs.form.reset();
     },
     submit() {
+      let vm = this
+      this.loading = true
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email.replace(' ',''), this.password)
@@ -174,8 +178,11 @@ export default {
               regNumber: this.regnumber,
               courses: [],
             })
-            .then((res) => {})
+            .then((res) => {
+              vm.loading = false
+            })
             .catch((error) => {
+              vm.loading = false
               this.loginHasError = true;
               this.errorMessage = error.mesage;
             });
@@ -183,6 +190,7 @@ export default {
         .catch((error) => {
           this.loginHasError = true;
           this.errorMessage = error.message;
+          this.loading = false
         });
     },
   },

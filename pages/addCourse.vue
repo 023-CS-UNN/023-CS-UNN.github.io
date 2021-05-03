@@ -14,7 +14,9 @@
               :value="course.id"
             >
             </v-checkbox>
-            <v-btn color="success" @click="submit">Save</v-btn>
+            <v-btn color="success" @click="submit" :loading="loading"
+              >Save</v-btn
+            >
           </v-sheet>
         </v-form>
       </v-card>
@@ -42,11 +44,12 @@ export default {
   data() {
     return {
       course_selections: [],
-      loginHasError:false,
-      errorMessage:""
+      loginHasError: false,
+      errorMessage: "",
+      loading: false,
     };
   },
-  middleware:"auth",
+  middleware: "auth",
   computed: {
     ...mapState(["auth", "courses", "user"]),
   },
@@ -56,6 +59,7 @@ export default {
   methods: {
     submit() {
       let vm = this;
+      this.loading = true;
       db.collection("Students")
         .doc(this.user.id)
         .update({
@@ -63,12 +67,14 @@ export default {
         })
         .then((res) => {
           vm.$store.commit("setUserCourses", vm.course_selections);
-          this.loginHasError = true
-          this.errorMessage = "Saved your records"
+          this.loginHasError = true;
+          this.loading = false;
+          this.errorMessage = "Saved your records";
         })
         .catch((error) => {
-          this.loginHasError = true
-          this.errorMessage = error.message
+          this.loginHasError = true;
+          this.errorMessage = error.message;
+          this.loading = false;
         });
     },
   },

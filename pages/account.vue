@@ -24,6 +24,18 @@
               ></v-text-field>
             </v-col>
           </v-row>
+          <v-dialog v-model="dialog" hide-overlay persistent width="300">
+            <v-card color="primary" dark>
+              <v-card-text>
+                {{ querying ? "Saving your records" : "" }}
+                <v-progress-linear
+                  indeterminate
+                  color="white"
+                  class="mb-0"
+                ></v-progress-linear>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
           <v-row class="mx-auto"
             ><v-col cols="12" md="4">
               <v-text-field
@@ -45,6 +57,7 @@
           <v-btn
             style="margin-left: 10px"
             :disabled="!valid"
+            :loading="loading"
             color="success"
             class="mr-4"
             @click="validate"
@@ -52,13 +65,6 @@
             SAVE</v-btn
           >
         </v-form>
-        <v-card-text v-if="loading">
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
-        </v-card-text>
       </v-card>
 
       <v-skeleton-loader
@@ -112,9 +118,11 @@ export default {
       lastname: "",
       middlename: "",
       errorMessage: "",
-      SuccessMessage:"Successfully updated your Records",
-      loginHasSuccess:false,
+      SuccessMessage: "Successfully updated your Records",
+      loginHasSuccess: false,
       loading: false,
+      dialog: false,
+      querying: false,
       valid: true,
       loginHasError: false,
       regnumberRules: [
@@ -139,7 +147,7 @@ export default {
       }
     },
     submit() {
-        let vm = this
+      let vm = this;
       this.loading = true;
       db.collection("Students")
         .doc(vm.user.id)
@@ -154,12 +162,12 @@ export default {
         .then((res) => {
           vm.loginHasSuccess = true;
           vm.loading = false;
-          vm.$store.commit('updateUser',{
-              lastname:vm.lastname,
-              firstname:vm.firstname,
-              middlename:vm.middlename,
-              regNumber:vm.regnumber
-          })
+          vm.$store.commit("updateUser", {
+            lastname: vm.lastname,
+            firstname: vm.firstname,
+            middlename: vm.middlename,
+            regNumber: vm.regnumber,
+          });
         })
         .catch((error) => {
           vm.loginHasError = true;

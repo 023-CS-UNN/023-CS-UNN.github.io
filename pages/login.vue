@@ -45,6 +45,7 @@
                   color="success"
                   class="mr-4"
                   @click="validate"
+                  :loading="loading"
                 >
                   Login</v-btn
                 >
@@ -95,9 +96,10 @@ export default {
       ],
       loginHasError: false,
       errorMessage: "",
+      loading: false,
     };
   },
-  middleware:"guest",
+  middleware: "guest",
   methods: {
     validate() {
       this.$refs.form.validate();
@@ -110,14 +112,16 @@ export default {
     },
     submit() {
       let vm = this;
+      this.loading = true;
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {
-          let user = userCredential.user;
+          vm.loading = false;
           vm.$router.push("/");
         })
         .catch((error) => {
+          vm.loading = false;
           this.loginHasError = true;
           this.errorMessage = error.message;
         });
